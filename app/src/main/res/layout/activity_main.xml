@@ -5,38 +5,55 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
+    android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:weightSum="13">
+    android:weightSum="17">
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:text="@string/main_name"
-        android:gravity="center_horizontal"/>
+        android:textSize="60sp"
+        style="@style/defaultStyleForMainActivityView"
+        android:layout_weight="5"/>
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:text="@string/best_score"
-        android:gravity="center_horizontal"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/start_game"
-        android:gravity="center_horizontal"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/reset_score"
-        android:gravity="center_horizontal"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/options"
-        android:gravity="center_horizontal"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/exit"
-        android:gravity="center_horizontal"/>
+        android:textSize="20sp"
+        style="@style/defaultStyleForMainActivityView"
+        android:layout_weight="1"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="9"
+        android:gravity="center"
+        android:weightSum="8">
+        <Button
+            style="@style/defaultStyleForMainActivityView"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:text="@string/start_game"
+            android:layout_weight="2" />
+        <Button
+            style="@style/defaultStyleForMainActivityView"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:text="@string/reset_score"/>
+        <Button
+            style="@style/defaultStyleForMainActivityView"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:text="@string/options"/>
+        <Button
+            style="@style/defaultStyleForMainActivityView"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:text="@string/exit"/>
+    </LinearLayout>
 
 
 </LinearLayout>
