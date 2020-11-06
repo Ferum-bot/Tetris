@@ -34,25 +34,29 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:text="@string/start_game"
-            android:layout_weight="2" />
+            android:layout_weight="2"
+            android:id="@+id/start_game"/>
         <Button
             style="@style/defaultStyleForMainActivityView"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="2"
-            android:text="@string/reset_score"/>
+            android:text="@string/reset_score"
+            android:id="@+id/reset_score"/>
         <Button
             style="@style/defaultStyleForMainActivityView"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="2"
-            android:text="@string/options"/>
+            android:text="@string/options"
+            android:id="@+id/options"/>
         <Button
             style="@style/defaultStyleForMainActivityView"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="2"
-            android:text="@string/exit"/>
+            android:text="@string/exit"
+            android:id="@+id/exit"/>
     </LinearLayout>
 
 
