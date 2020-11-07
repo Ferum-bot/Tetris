@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import com.example.tetris.storage.AppPreferences
 
 class GameActivity : AppCompatActivity() {
 
@@ -16,16 +17,33 @@ class GameActivity : AppCompatActivity() {
 
     private lateinit var clickListenerForButton: View.OnClickListener
 
+    private var appReferences: AppPreferences? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
         setDefaultOptions()
         attachAllView()
+        updateAllValues()
+    }
+
+    private  fun updateAllValues() {
+        updateBestScore()
+        updateCurrentScore()
+    }
+
+    private fun updateBestScore() {
+        bestScoreView.text = appReferences?.getHighScore().toString()
+    }
+
+    private fun updateCurrentScore() {
+        currentScoreView.text = "0"
     }
 
     private fun setDefaultOptions() {
         supportActionBar?.hide()
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        appReferences = AppPreferences(this)
     }
 
     private fun attachAllView() {
