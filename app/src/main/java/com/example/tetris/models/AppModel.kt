@@ -181,6 +181,82 @@ class AppModel {
         }
     }
 
+    private fun translateBlock(position: Point, frameNumber: Int) {
+        synchronized(field){
+            val shape: Array<ByteArray>? = currentBlock?.getShape(frameNumber)
+            if (shape != null) {
+                for (i in shape.indices) {
+                    for (j in shape[i].indices) {
+                        val y = position.y + i
+                        val x = position.x + j
+                        if (shape[i][j] != CellConstants.EMPTY.value) {
+                            field[y][x] = shape[i][j]
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun blocAdditionPossible(): Boolean {
+        if (!moveValid(currentBlock?.position as Point, currentBlock?.frameNumber)) {
+            return false
+        }
+        return true
+    }
+
+    private fun shiftRows(nToRow: Int) {
+        if (nToRow > 0) {
+            for (j in nToRow - 1 downTo 0) {
+                for (m in 0 until field[j].size) {
+                    setCellStatus(j + 1, m, getCellStatus(j, m))
+                }
+            }
+        }
+        for (j in 0 until field[0].size) {
+            setCellStatus(0, j, CellConstants.EMPTY.value)
+        }
+    }
+
+    fun startGame() {
+        if (!isGameActive()) {
+            currentState = Statuses.ACTIVE.name
+            generateNextBlock()
+        }
+    }
+
+    fun resetGame() {
+        resetModel()
+        startGame()
+    }
+
+    fun endGame() {
+        currentScore = 0
+        currentState = Statuses.OVER.name
+    }
+
+    private fun resetModel() {
+        resetField(false)
+        currentState = Statuses.AWAITING_START.name
+        currentScore = 0
+    }
+
+    private fun assessFiled() {
+        for (i in field.indices) {
+            var emptyCells = 0
+            for (j in field[i].indices) {
+                val status = getCellStatus(i, j)
+                val isEmpty = CellConstants.EMPTY.value == status
+                if (isEmpty) {
+                    emptyCells++
+                }
+            }
+            if (emptyCells == 0) {
+                shiftRows(i)
+            }
+        }
+    }
+
 
 
 }
