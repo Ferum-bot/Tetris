@@ -97,4 +97,90 @@ class AppModel {
         val shape = currentBlock?.getShape(frameNumber as Int)
         return validTranslation(position, shape as Array<ByteArray>)
     }
+
+    fun generateField(action: String) {
+        if (isGameActive()) {
+            resetField()
+            var frameNumber = currentBlock?.frameNumber
+            val coordinate: Point? = Point()
+            coordinate?.x = currentBlock?.position?.x
+            coordinate?.y = currentBlock?.position?.y
+
+            when(action) {
+                Motions.LEFT.name -> coordinate?.x = currentBlock?.position?.x?.minus(1)
+                Motions.RIGHT.name -> coordinate?.x = currentBlock?.position?.x?.plus(1)
+                Motions.DOWN.name -> coordinate?.y = currentBlock?.position?.y?.minus(1)
+                Motions.ROTATE.name -> {
+                    frameNumber = frameNumber?.plus(1)
+                    if (frameNumber != null) {
+                        if (frameNumber >= currentBlock?.frameCount as Int) {
+                            frameNumber = 0
+                        }
+                    }
+                }
+            }
+
+            if(!moveValid(coordinate as Point, frameNumber)) {
+                translateBlock(currentBlock?.position as Point, currentBlock?.frameNumber as Int)
+                if (Motions.DOWN.name == action) {
+                    boostScore()
+                    persistCellData()
+                    assessField()
+                    generateNextBlock()
+                    if (!blocAdditionPossible()) {
+                        currentState = Statuses.OVER.name
+                        currentBlock = null
+                        resetField(false)
+                    }
+                }
+            }
+            else {
+                if (frameNumber != null) {
+                    translateBlock(coordinate, frameNumber)
+                    currentBlock?.setState(frameNumber, coordinate)
+                }
+            }
+        }
+    }
+
+    private fun resetField(ephemeralCellOnly: Boolean = true) {
+        for (i in 0 until FieldConstants.ROW_COUNT.value) {
+            for (j in 0 until FieldConstants.COLUMN_COUNT.value) {
+                if (!ephemeralCellOnly || field[i][j] == CellConstants.EPHEMERAL.value) {
+                    field[i][j] = CellConstants.EMPTY.value
+                }
+            }
+        }
+    }
+
+    private fun persistCellData() {
+        for (i in 0 until FieldConstants.ROW_COUNT.value) {
+            for (j in 0 until FieldConstants.COLUMN_COUNT.value) {
+                var status = getCellStatus(i, j)
+                if (status == CellConstants.EPHEMERAL.value) {
+                    status = currentBlock?.staticValue
+                    setCellStatus(i, j, status)
+                }
+            }
+        }
+    }
+
+    private fun assessField() {
+        for (i in 0 until FieldConstants.ROW_COUNT.value) {
+            var emptyCells = 0;
+            for (j in field[i].indices) {
+                val status = getCellStatus(i, j)
+                val isEmpty = CellConstants.EMPTY.value == status
+                if (isEmpty) {
+                    emptyCells++
+                }
+            }
+            if (emptyCells == 0) {
+                shiftRows(i)
+            }
+        }
+    }
+
+
+
 }

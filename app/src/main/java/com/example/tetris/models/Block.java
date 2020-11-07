@@ -53,6 +53,10 @@ public class Block {
         return  Shape.values()[shapeIndex].getFrameCount();
     }
 
+    public final int getFrameNumber() {
+        return this.frameNumber;
+    }
+
     public int getColor(){
         return this.color.rgbValue;
     }
