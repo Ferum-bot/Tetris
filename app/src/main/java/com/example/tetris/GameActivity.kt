@@ -75,6 +75,7 @@ class GameActivity : AppCompatActivity() {
 
         tetrisView = findViewById(R.id.tetris_view)
         tetrisView.setActivity(this)
+        appModel.setPreferences(appReferences!!)
         tetrisView.setModel(appModel)
     }
 

@@ -109,7 +109,7 @@ class AppModel {
             when(action) {
                 Motions.LEFT.name -> coordinate?.x = currentBlock?.position?.x?.minus(1)
                 Motions.RIGHT.name -> coordinate?.x = currentBlock?.position?.x?.plus(1)
-                Motions.DOWN.name -> coordinate?.y = currentBlock?.position?.y?.minus(1)
+                Motions.DOWN.name -> coordinate?.y = currentBlock?.position?.y?.plus(1)
                 Motions.ROTATE.name -> {
                     frameNumber = frameNumber?.plus(1)
                     if (frameNumber != null) {

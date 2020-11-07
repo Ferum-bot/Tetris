@@ -9,6 +9,7 @@ import android.graphics.RectF
 import android.os.Message
 import android.util.AttributeSet
 import android.widget.Toast
+import android.os.Handler
 import androidx.annotation.Dimension
 import com.example.tetris.GameActivity
 import com.example.tetris.constants.CellConstants
@@ -16,7 +17,6 @@ import com.example.tetris.constants.FieldConstants
 import com.example.tetris.models.AppModel
 import com.example.tetris.models.Block
 import java.util.jar.Attributes
-import java.util.logging.Handler
 import java.util.logging.LogRecord
 
 class TetrisView: View{
@@ -91,7 +91,7 @@ class TetrisView: View{
         canvas.drawRoundRect(rectangle, 4F, 4F, paint)
     }
 
-    private class ViewHandler(private val owner: TetrisView): android.os.Handler() {
+    private class ViewHandler(private val owner: TetrisView): Handler() {
         override fun handleMessage(message: Message) {
             if (message.what == 0) {
                 if (owner.model != null) {
