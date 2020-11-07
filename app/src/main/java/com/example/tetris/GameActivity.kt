@@ -12,12 +12,12 @@ class GameActivity : AppCompatActivity() {
 
     private lateinit var restartButton: Button
 
-    private lateinit var bestScoreView: TextView
-    private lateinit var currentScoreView: TextView
+    lateinit var bestScoreView: TextView
+    lateinit var currentScoreView: TextView
 
     private lateinit var clickListenerForButton: View.OnClickListener
 
-    private var appReferences: AppPreferences? = null
+    var appReferences: AppPreferences? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
