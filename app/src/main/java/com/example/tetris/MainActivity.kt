@@ -91,7 +91,5 @@ class MainActivity : AppCompatActivity() {
     private fun setDefaultOptions() {
         supportActionBar?.hide()
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-        val arrayOfButtons = arrayOf(startGameButton, resetScoreButton, optionsButton, exitButton)
-
     }
 }
