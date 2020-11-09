@@ -26,6 +26,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var onClickListener: View.OnClickListener
 
+    private var appPreferences: AppPreferences? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -73,8 +75,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun resetScore(view: View) {
-        val preferences = AppPreferences(this)
-        preferences.clearHighScore()
+        appPreferences?.clearHighScore()
         bestScoreTextView.text = getString(R.string.best_score) + " 0"
         val snackBar = Snackbar.make(view, "Score successfully reset", Snackbar.LENGTH_SHORT)
         snackBar.animationMode = Snackbar.ANIMATION_MODE_FADE
@@ -91,5 +92,7 @@ class MainActivity : AppCompatActivity() {
     private fun setDefaultOptions() {
         supportActionBar?.hide()
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        appPreferences = AppPreferences(this)
+        bestScoreTextView.text = getString(R.string.best_score) + " " + appPreferences?.getHighScore().toString()
     }
 }

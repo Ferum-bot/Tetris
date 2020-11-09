@@ -7,16 +7,19 @@
     tools:context=".MainActivity"
     android:gravity="center_horizontal"
     android:orientation="vertical"
+    android:background="@android:color/black"
     android:weightSum="17">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:textColor="@color/dark_red"
         android:text="@string/main_name"
         android:textSize="60sp"
         style="@style/defaultStyleForMainActivityView"
         android:layout_weight="5"/>
     <TextView
         android:layout_width="match_parent"
+        android:textColor="@color/dark_red"
         android:layout_height="0dp"
         android:text="@string/best_score"
         android:textSize="20sp"
@@ -32,28 +35,36 @@
         android:weightSum="8">
         <Button
             style="@style/defaultStyleForMainActivityView"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/width_for_buttons"
+            android:textColor="@android:color/black"
+            android:background="@android:color/holo_red_light"
             android:layout_height="0dp"
             android:text="@string/start_game"
             android:layout_weight="2"
             android:id="@+id/start_game" />
         <Button
             style="@style/defaultStyleForMainActivityView"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/width_for_buttons"
+            android:textColor="@android:color/black"
+            android:background="@android:color/holo_red_light"
             android:layout_height="0dp"
             android:layout_weight="2"
             android:text="@string/reset_score"
             android:id="@+id/reset_score"/>
         <Button
             style="@style/defaultStyleForMainActivityView"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/width_for_buttons"
+            android:textColor="@android:color/black"
+            android:background="@android:color/holo_red_light"
             android:layout_height="0dp"
             android:layout_weight="2"
             android:text="@string/options"
             android:id="@+id/options"/>
         <Button
             style="@style/defaultStyleForMainActivityView"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/width_for_buttons"
+            android:textColor="@android:color/black"
+            android:background="@android:color/holo_red_light"
             android:layout_height="0dp"
             android:layout_weight="2"
             android:text="@string/exit"

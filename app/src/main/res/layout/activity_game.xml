@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".GameActivity"
+    android:background="@android:color/black"
     android:orientation="horizontal"
     android:weightSum="3">
     <LinearLayout
@@ -23,21 +24,25 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/dark_red"
                 android:text="@string/current_score"
                 android:textSize="18sp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/dark_red"
                 android:textSize="16sp"
                 android:id="@+id/current_score"
                 android:text="0"/>
             <TextView
                 android:layout_width="wrap_content"
+                android:textColor="@color/dark_red"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
                 android:text="@string/high_score"/>
             <TextView
                 android:layout_width="wrap_content"
+                android:textColor="@color/dark_red"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:id="@+id/best_score"
@@ -51,6 +56,8 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:background="@android:color/holo_red_light"
                 android:id="@+id/restart_game"
                 android:text="@string/restart"/>
 

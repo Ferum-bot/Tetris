@@ -33,7 +33,7 @@ class TetrisView: View{
     constructor(context: Context, attrs: AttributeSet, defStyle: Int): super(context, attrs, defStyle)
 
     companion object {
-        private val DELAY = 500
+        private val DELAY = 200
         private val BLOCK_OFFSET = 2
         private val FRAME_OFFSET_VALUE = 10
     }
@@ -62,7 +62,7 @@ class TetrisView: View{
     }
 
     private fun drawFrame(canvas: Canvas) {
-        paint.color = Color.LTGRAY
+        paint.color = Color.BLACK
         canvas.drawRect(frameOffset.width.toFloat(),
             frameOffset.height.toFloat(), width - frameOffset.width.toFloat(),height - frameOffset.height.toFloat(), paint)
     }

@@ -81,6 +81,7 @@ class GameActivity : AppCompatActivity() {
 
     private fun onClickButton(view: View) {
         appModel.resetGame()
+        updateCurrentScore()
     }
 
     private fun onTouchTetrisView(view: View, event: MotionEvent): Boolean {
