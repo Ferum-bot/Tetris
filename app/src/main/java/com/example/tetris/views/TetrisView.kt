@@ -62,9 +62,12 @@ class TetrisView: View{
     }
 
     private fun drawFrame(canvas: Canvas) {
+        paint.color = Color.RED
+        canvas.drawRect(frameOffset.width.toFloat(), frameOffset.height.toFloat(),
+            width - frameOffset.width.toFloat(),height - frameOffset.height.toFloat(), paint)
         paint.color = Color.BLACK
-        canvas.drawRect(frameOffset.width.toFloat(),
-            frameOffset.height.toFloat(), width - frameOffset.width.toFloat(),height - frameOffset.height.toFloat(), paint)
+        canvas.drawRect(frameOffset.width.toFloat() + 2f,  frameOffset.height.toFloat() + 2f,
+            width - frameOffset.width.toFloat() - 2f, height - frameOffset.height.toFloat() - 2f, paint);
     }
 
     private fun drawCell(canvas: Canvas, row: Int, col: Int) {
@@ -134,7 +137,18 @@ class TetrisView: View{
         }
     }
 
+    fun setGameOnPause() {
+        this.model?.setGameOnPause()
+    }
+
+    fun continueGame() {
+        this.model?.continueGame()
+    }
+
     fun setGameCommandWithDelay(move: AppModel.Motions) {
+        if (model != null && model!!.isGamePaused()) {
+            return
+        }
         val now = System.currentTimeMillis()
         if (now - lastMove > DELAY) {
             model?.generateField(move.name)

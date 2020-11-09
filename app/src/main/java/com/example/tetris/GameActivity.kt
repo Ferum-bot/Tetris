@@ -18,6 +18,7 @@ class GameActivity : AppCompatActivity() {
     private val appModel: AppModel = AppModel()
 
     private lateinit var restartButton: Button
+    private lateinit var pauseButton: Button
 
     lateinit var bestScoreView: TextView
     lateinit var currentScoreView: TextView
@@ -42,6 +43,7 @@ class GameActivity : AppCompatActivity() {
 
     private fun setClickListeners() {
         restartButton.setOnClickListener(clickListenerForButton)
+        pauseButton.setOnClickListener(clickListenerForButton)
         tetrisView.setOnTouchListener(this::onTouchTetrisView)
     }
 
@@ -66,6 +68,7 @@ class GameActivity : AppCompatActivity() {
 
     private fun attachAllView() {
         restartButton = findViewById(R.id.restart_game)
+        pauseButton = findViewById(R.id.paused)
 
         bestScoreView = findViewById(R.id.best_score)
         currentScoreView = findViewById(R.id.current_score)
@@ -80,12 +83,40 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun onClickButton(view: View) {
-        appModel.resetGame()
-        updateCurrentScore()
+        when(view.id) {
+            R.id.restart_game -> {
+                tetrisView.continueGame()
+                pauseButton.text = getString(R.string.pause)
+                appModel.resetGame()
+                updateCurrentScore()
+                tetrisView.setGameCommandWithDelay(AppModel.Motions.DOWN)
+            }
+            R.id.paused -> doPauseAction(view as Button)
+        }
+    }
+
+    private fun doPauseAction(button: Button) {
+        when(button.text) {
+            getString(R.string.start) -> {
+                button.text = getString(R.string.pause)
+                appModel.startGame()
+                tetrisView.setGameCommandWithDelay(AppModel.Motions.DOWN)
+            }
+            getString(R.string.pause) -> {
+                button.text = getString(R.string.continue_game)
+                tetrisView.setGameOnPause()
+            }
+            getString(R.string.continue_game) -> {
+                button.text = getString(R.string.pause)
+                tetrisView.continueGame()
+                tetrisView.setGameCommandWithDelay(AppModel.Motions.DOWN)
+            }
+        }
     }
 
     private fun onTouchTetrisView(view: View, event: MotionEvent): Boolean {
         if (appModel.isGameOver() || appModel.isGameAwaitingStart()) {
+            pauseButton.text = getString(R.string.pause)
             appModel.startGame()
             tetrisView.setGameCommandWithDelay(AppModel.Motions.DOWN)
         }

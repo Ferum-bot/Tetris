@@ -9,7 +9,7 @@ import com.example.tetris.storage.AppPreferences
 class AppModel {
 
     enum class Statuses {
-        AWAITING_START, ACTIVE, INACTIVE, OVER
+        AWAITING_START, ACTIVE, INACTIVE, OVER, PAUSED;
     }
 
     enum class Motions {
@@ -54,6 +54,9 @@ class AppModel {
         return currentState == Statuses.AWAITING_START.name
     }
 
+    fun isGamePaused(): Boolean {
+        return currentState == Statuses.PAUSED.name
+    }
     private fun boostScore() {
         currentScore += 10
         if (currentScore > preferences?.getHighScore() as Int) {
@@ -223,6 +226,14 @@ class AppModel {
             currentState = Statuses.ACTIVE.name
             generateNextBlock()
         }
+    }
+
+    fun setGameOnPause() {
+        currentState = Statuses.PAUSED.name
+    }
+
+    fun continueGame() {
+        currentState = Statuses.ACTIVE.name
     }
 
     fun resetGame() {

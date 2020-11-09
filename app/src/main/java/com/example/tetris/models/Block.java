@@ -77,7 +77,13 @@ public class Block {
         GREEN(Color.rgb(0, 128, 0), (byte) 3),
         ORANGE(Color.rgb(255, 140, 0), (byte) 4),
         YELLOW(Color.rgb(255, 255, 0), (byte) 5),
-        CYAN(Color.rgb(0, 255, 255), (byte)6);
+        CYAN(Color.rgb(0, 255, 255), (byte) 6),
+        DARK_BLUE(Color.rgb(0, 0, 139), (byte) 7),
+        LIME(Color.rgb(0, 255, 0), (byte) 8),
+        WHITE(Color.rgb(255, 255, 255), (byte) 9),
+        PURPLE(Color.rgb(128, 0, 128), (byte) 10),
+        DARK_GREEN(Color.rgb(0, 100, 0), (byte) 11),
+        GRAY(Color.rgb(112, 128, 144), (byte) 12);
 
         BlockColor(int rgbValue, byte value) {
             this.byteValue = value;
